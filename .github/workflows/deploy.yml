@@ -12,9 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          repository: puffds/dices
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Set up JDK
         uses: actions/setup-java@v2
@@ -33,9 +30,9 @@ jobs:
             cd /home/apavlov/dices/dices
             git pull origin master
 
-            if [ -f "gradlew" ]; then
+            if [ -f "./gradlew" ]; then
               chmod +x gradlew
-              gradlew build
+              ./gradlew build
             else
               echo "gradlew not found!"
               exit 1
