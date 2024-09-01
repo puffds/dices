@@ -20,7 +20,7 @@ jobs:
 
       - name: Deploy to VM
         run: |
-          ssh -o StrictHostKeyChecking=no user@your_vm_ip << 'EOF'
+          ssh -o StrictHostKeyChecking=no apavlov@176.109.110.128 << 'EOF'
             mkdir -p /home/apavlov/dices
             cd /home/apavlov/dices
             if [ ! -d ".git" ]; then
