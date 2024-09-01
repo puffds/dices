@@ -23,6 +23,12 @@ dependencies {
 }
 
 jar {
+    manifest {
+        attributes(
+                'Main-Class': 'org.example.Bot' // Укажи полное имя главного класса
+        )
+    }
+
     archiveBaseName.set('dices')
     archiveVersion.set('1.0')
 }
