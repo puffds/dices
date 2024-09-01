@@ -21,14 +21,9 @@ jobs:
       - name: Deploy to VM
         run: |
           ssh -o StrictHostKeyChecking=no apavlov@176.109.110.128 << 'EOF'
-            cd /home/apavlov/dices
-          
-            if [ ! -d ".git" ]; then
-              git clone https://github.com/puffds/dices.git
-            else
-              git pull origin master
-            fi
-          
+            cd /home/apavlov/dices/dices
+            git pull origin master
+
             if [ -f "./gradlew" ]; then
               chmod +x ./gradlew
               ./gradlew build
