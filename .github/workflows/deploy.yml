@@ -22,8 +22,21 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no apavlov@176.109.110.128 << 'EOF'
             cd /home/apavlov/dices
-            git pull origin master
-            ./gradlew build
+          
+            if [ ! -d ".git" ]; then
+              git clone git@github.com:puffds/dices.git
+            else
+              git pull origin master
+            fi
+          
+            if [ -f "./gradlew" ]; then
+              chmod +x ./gradlew
+              ./gradlew build
+            else
+              echo "gradlew not found!"
+              exit 1
+            fi
+          
             pkill -f 'java -jar' || true
             nohup java -jar build/libs/dices-1.0.jar &
           EOF
