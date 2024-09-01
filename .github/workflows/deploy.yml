@@ -31,5 +31,5 @@ jobs:
               exit 1
             fi
             pkill -f 'java -jar' || true
-            nohup java -jar build/libs/dices-1.0.jar &
+            nohup java -jar build/libs/org.example-1.0-SNAPSHOT.jar &
           EOF
