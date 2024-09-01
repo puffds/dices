@@ -13,13 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up SSH
-        run: |
-              mkdir -p ~/.ssh
-              echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-              chmod 600 ~/.ssh/id_rsa
-              ssh-keyscan github.com >> ~/.ssh/known_hosts
-
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
@@ -34,16 +27,15 @@ jobs:
       - name: Deploy to VM
         run: |
           ssh -o StrictHostKeyChecking=no apavlov@176.109.110.128 << 'EOF'
-            cd /home/apavlov/dices/dices
-            git pull origin master
+          git clone git@github.com:puffds/dices.git /home/apavlov/dices
 
-            if [ -f "./gradlew" ]; then
-              chmod +x gradlew
-              ./gradlew build
-            else
-              echo "gradlew not found!"
-              exit 1
-            fi
+#            if [ -f "./gradlew" ]; then
+#              chmod +x gradlew
+#              ./gradlew build
+#            else
+#              echo "gradlew not found!"
+#              exit 1
+#            fi
           
             pkill -f 'java -jar' || true
             nohup java -jar build/libs/dices-1.0.jar &
