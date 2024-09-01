@@ -24,7 +24,7 @@ jobs:
             cd /home/apavlov/dices
           
             if [ ! -d ".git" ]; then
-              git clone git@github.com:puffds/dices.git
+              git clone https://github.com/puffds/dices.git
             else
               git pull origin master
             fi
