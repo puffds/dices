@@ -22,7 +22,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no apavlov@176.109.110.128 << 'EOF'
             cd /home/apavlov/dices
-            git pull origin main
+            git pull origin master
             ./gradlew build
             pkill -f 'java -jar' || true
             nohup java -jar build/libs/dices-1.0.jar &
