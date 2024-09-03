@@ -1,0 +1,38 @@
+name: Deploy to VM
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to VM
+        run: |
+          ssh -o StrictHostKeyChecking=no apavlov@${{ secrets.IP_VM }} << 'EOF'
+            cd /home/apavlov/dices
+            git pull origin master
+            echo "****************UPDATED REPO****************"
+            if [ -f "./gradlew" ]; then
+              chmod +x ./gradlew
+              ./gradlew build
+            else
+              echo "gradlew not found!"
+              exit 1
+            fi
+            pkill -f 'java -jar' || true
+            echo "****************KILL BOT****************"
+            nohup java -jar build/libs/dices-1.0-SNAPSHOT-all.jar &
+            echo "****************START BOT****************"
+          EOF
