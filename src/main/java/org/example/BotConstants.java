@@ -6,7 +6,7 @@ public class BotConstants {
     public static final String REGEX = "^(\\d+(?:d|д)\\d+[?:n|p|н|п]?)(?: " +
             "(\\d+(?:d|д)\\d+[?:n|p|н|п]?))* *(?: (<=|>=|<|>) \\d+)?$";
 
-    public static final String HELP_MESSAGE = "Здорова, кожаный! Го бросать кубики!!" +
+    public static final String HELP_MESSAGE = "Здорова, кожаный! Го бросать кубики!" +
             "\n\nНапиши количество кубиков и их грани вот в таком формате. Примеры:" +
             "\n1. 1d12" +
             "\n2. 1д8 2д6" +
