@@ -23,6 +23,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no apavlov@176.109.110.128 << 'EOF'
             cd /home/apavlov/dices/dices
             git pull origin master
+            echo "****************UPDATED REPO****************"
             if [ -f "./gradlew" ]; then
               chmod +x ./gradlew
               ./gradlew build
@@ -31,5 +32,7 @@ jobs:
               exit 1
             fi
             pkill -f 'java -jar' || true
+            echo "****************KILL BOT****************"
             nohup java -jar build/libs/dices-1.0-SNAPSHOT-all.jar &
+            echo "****************START BOT****************"
           EOF
