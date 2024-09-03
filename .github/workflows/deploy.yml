@@ -21,7 +21,7 @@ jobs:
       - name: Deploy to VM
         run: |
           ssh -o StrictHostKeyChecking=no apavlov@176.109.110.128 << 'EOF'
-            cd /home/apavlov/dices/dices
+            cd /home/apavlov/dices
             git pull origin master
             echo "****************UPDATED REPO****************"
             if [ -f "./gradlew" ]; then
