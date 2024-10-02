@@ -81,12 +81,21 @@ public class Calculations {
         int countDice = Integer.parseInt(dice.split("[dд]")[0]);
         String lastSymbol = String.valueOf(dice.charAt(dice.length() - 1));
         int maxDiceMod = getMaxDiceMod(dice);
-
         double probability = 0;
+        int[][] allRolls = new int[countDice][ROLLS_COUNT];
+
         for (int i = 0; i < countDice; i++) {
-            int[] rolls = generateRollsBasedOnModifier(lastSymbol, maxDiceMod);
-            probability += countOccurrences(rolls, condition, number);
+            allRolls[i] = generateRollsBasedOnModifier(lastSymbol, maxDiceMod);
         }
+
+        for (int i = 0; i < ROLLS_COUNT; i++) {
+            int sumOfRolls = 0;
+            for (int j = 0; j < countDice; j++) {
+                sumOfRolls += allRolls[j][i];
+            }
+            probability += countOccurrences(new int[]{sumOfRolls}, condition, number);
+        }
+
         return probability;
     }
 
